@@ -43,6 +43,7 @@ public class Apple extends Food{
     public Apple(String name, String size) {
         super(name);
         this.size = size;
+        this.colories = calculateCalories();
     }
 
     public Apple(String size) {

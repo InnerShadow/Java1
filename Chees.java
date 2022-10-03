@@ -18,6 +18,7 @@ public class Chees extends Food {
 
     public Chees(String name) {
         super(name);
+        this.colories = calculateCalories();
     }
 
     public Chees() {

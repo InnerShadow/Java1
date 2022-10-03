@@ -15,6 +15,7 @@ public class Cocktail extends Food{
         super(name);
         this.drink = drink;
         this.fruit = fruit;
+        this.colories = calculateCalories();
     }
 
     public void setDrink(String drink) {
@@ -59,6 +60,7 @@ public class Cocktail extends Food{
                 "drink='" + drink + '\'' +
                 ", fruit='" + fruit + '\'' +
                 ", name='" + name + '\'' +
+                ", colories=" + colories +
                 '}';
     }
 

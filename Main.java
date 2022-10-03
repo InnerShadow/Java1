@@ -1,8 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.Vector;
+import java.util.*;
 
 public class Main {
     static Scanner console = new Scanner(System.in);
@@ -56,6 +53,28 @@ public class Main {
             System.out.println("Tatal caloris is: " + Calculate(breakfast));
         }
 
+        if(IfSorted(args)) {
+            TreeSet<Food> sortBreakfast = new TreeSet<Food>(new Comparator<Food>() {
+                public int compare(Food i1, Food i2) {
+                    if (i1.calculateCalories() > i2.calculateCalories()) {
+                        return -1;
+                    } else if (i1.calculateCalories() < i2.calculateCalories()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+
+            });
+
+            sortBreakfast.addAll(breakfast);
+            
+
+            for(Food f : sortBreakfast){
+                System.out.println(f);
+            }
+        }
+
     }
 
     static int Calculate(Vector<Food> breakfast){
@@ -73,7 +92,7 @@ public class Main {
                 counter++;
             }
         }
-        System.out.println(counter);
+        System.out.println("Nym of same elements is/are: " + counter);
     }
 
     static boolean IfCalories(String[] arguments){
@@ -84,5 +103,15 @@ public class Main {
         }
         return false;
     }
+
+    static boolean IfSorted(String[] arguments){
+        for(String s : arguments){
+            if(s.compareTo("-sort") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
