@@ -52,8 +52,8 @@ public abstract class Food implements Consumable {
         return name.equals(((Food)arg0).name);
     }
 
-    public void Print(){
-
+    @Override
+    public void consum() {
+        System.out.println(this + "has been eaten");
     }
-
 }

@@ -6,9 +6,6 @@ import java.util.Vector;
 
 public class Main {
     static Scanner console = new Scanner(System.in);
-
-
-
     public static void main(String[] args) {
         final int size = args.length;
         Vector<Food> breakfast = new Vector<Food>();
@@ -19,8 +16,19 @@ public class Main {
                         breakfast.add(new Cocktail("Coctail", args[++i], args[++i]));
                         break;
                     }
+                    case "Chees" : {
+                        breakfast.add(new Chees("Chees"));
+                        break;
+                    }
+                    case "Apple" : {
+                        breakfast.add(new Apple("Apple", args[++i]));
+                        break;
+                    }
                     default: {
-                        throw new RuntimeException("ClassnotFound");
+                        if(args[i].charAt(0) == '-'){
+                            break;
+                        }
+                        throw new RuntimeException("Class " + args[i] + " not Found");
                     }
                 }
             }
@@ -28,10 +36,12 @@ public class Main {
             System.out.println(error.toString());
         }
 
+
         System.out.println("Youre breakfast: ");
         for(Food cock : breakfast){
             System.out.println(cock.toString());
         }
+
 
         System.out.println("Enter Cocteail to Compear: ");
 
@@ -42,7 +52,9 @@ public class Main {
 
         Count(breakfast, ToCompear);
 
-        System.out.println("Tatal caloris is: " + Calculate(breakfast));
+        if(IfCalories(args)) {
+            System.out.println("Tatal caloris is: " + Calculate(breakfast));
+        }
 
     }
 
@@ -64,6 +76,13 @@ public class Main {
         System.out.println(counter);
     }
 
+    static boolean IfCalories(String[] arguments){
+        for(String s : arguments){
+            if(s.compareTo("-calories") == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
-
-

@@ -34,11 +34,6 @@ public class Cocktail extends Food{
     }
 
     @Override
-    public void consum() {
-
-    }
-
-    @Override
     public boolean equals(Object arg0) {
         if (!(arg0 instanceof Cocktail)) {
             return false;
