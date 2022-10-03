@@ -2,22 +2,35 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Main {
     static Scanner console = new Scanner(System.in);
 
+
+
     public static void main(String[] args) {
-        final int size = 5;
-        Food[] breakfast = new Food[size];
-        for(int i = 0; i < size; i++){
-            System.out.println("Enter " + (i + 1) + " Coctail: ");
-            String drink = console.nextLine();
-            String fruit = console.nextLine();
-            breakfast[i] = new Cocktail("Coctail", drink, fruit);
+        final int size = args.length;
+        Vector<Food> breakfast = new Vector<Food>();
+        try {
+            for (int i = 0; i < size; ++i) {
+                switch (args[i]) {
+                    case "Coctail": {
+                        breakfast.add(new Cocktail("Coctail", args[++i], args[++i]));
+                        break;
+                    }
+                    default: {
+                        throw new RuntimeException("ClassnotFound");
+                    }
+                }
+            }
+        } catch (RuntimeException error){
+            System.out.println(error.toString());
         }
 
-        for(int i = 0; i < size; i++){
-            System.out.println(breakfast[i].toString());
+        System.out.println("Youre breakfast: ");
+        for(Food cock : breakfast){
+            System.out.println(cock.toString());
         }
 
         System.out.println("Enter Cocteail to Compear: ");
@@ -27,33 +40,28 @@ public class Main {
 
         Cocktail ToCompear = new Cocktail("Coctail", drink, fruit);
 
-        Count(breakfast, size, ToCompear);
+        Count(breakfast, ToCompear);
 
-        System.out.println("Tatal caloris is: " + Calculate(breakfast, size));
+        System.out.println("Tatal caloris is: " + Calculate(breakfast));
 
     }
 
-    static int Calculate(Food[] breakfast, int size){
+    static int Calculate(Vector<Food> breakfast){
         int caloris = 0;
-        for(int i = 0; i < size; i++){
-            caloris += breakfast[i].calculateCalories();
+        for(int i = 0; i < breakfast.size(); i++){
+            caloris += breakfast.elementAt(i).calculateCalories();
         }
         return caloris;
     }
 
-    static void Count(Food[] breakfast, int size, Cocktail ToCompear) {
+    static void Count(Vector<Food> breakfast, Cocktail ToCompear) {
         int counter = 0;
-        for(int i = 0; i < size; i++){
-            if(breakfast[i].equals(ToCompear)){
+        for(int i = 0; i < breakfast.size(); i++){
+            if(breakfast.elementAt(i).equals(ToCompear)){
                 counter++;
             }
         }
         System.out.println(counter);
-//        try {
-//            int x = System.in.read();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
 }

@@ -4,6 +4,20 @@ import java.util.HashMap;
 
 public abstract class Food implements Consumable {
     protected String name = null;
+    protected double colories = 0.f;
+
+    public Food(String name, double colories) {
+        this.name = name;
+        this.colories = colories;
+    }
+
+    public void setColories(double colories) {
+        this.colories = colories;
+    }
+
+    public double getColories() {
+        return colories;
+    }
 
     public Food(String name) {
         this.name = name;

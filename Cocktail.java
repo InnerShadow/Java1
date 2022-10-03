@@ -5,6 +5,12 @@ public class Cocktail extends Food{
     protected String drink = null;
     protected String fruit = null;
 
+    public Cocktail(String name, double colories, String drink, String fruit) {
+        super(name, colories);
+        this.drink = drink;
+        this.fruit = fruit;
+    }
+
     public Cocktail(String name, String drink, String fruit) {
         super(name);
         this.drink = drink;
