@@ -1,3 +1,5 @@
+package rfe.bsu.SikolenkoMa.laba1;
+
 import java.util.Objects;
 
 public class Apple extends Food{
@@ -49,7 +51,6 @@ public class Apple extends Food{
     public Apple(String size) {
         this.size = size;
     }
-
 
     @Override
     public int calculateCalories() {

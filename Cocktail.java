@@ -1,3 +1,5 @@
+package rfe.bsu.SikolenkoMa.laba1;
+
 import java.util.Objects;
 
 public class Cocktail extends Food{

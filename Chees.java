@@ -1,3 +1,5 @@
+package rfe.bsu.SikolenkoMa.laba1;
+
 public class Chees extends Food {
     @Override
     public int calculateCalories() {

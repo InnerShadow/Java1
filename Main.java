@@ -1,4 +1,7 @@
+package rfe.bsu.SikolenkoMa.laba1;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 public class Main {
@@ -6,23 +9,35 @@ public class Main {
     public static void main(String[] args) {
         final int size = args.length;
         Vector<Food> breakfast = new Vector<Food>();
+
+//        System.out.println(Cocktail.class.getName());
         try {
             for (int i = 0; i < size; ++i) {
                 switch (args[i]) {
                     case "Coctail": {
-                        breakfast.add(new Cocktail("Coctail", args[++i], args[++i]));
+                        try {
+                            Cocktail coctail = null;
+                            Class clazz = Class.forName(Cocktail.class.getName());
+                            Class[] params = {String.class, String.class, String.class};
+                            coctail = (Cocktail) clazz.getConstructor(params).newInstance("Coctail", args[++i], args[++i]);
+                            //System.out.println(coctail.toString());
+                            breakfast.add(coctail);
+                        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                                 NoSuchMethodException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
                         break;
                     }
-                    case "Chees" : {
+                    case "Chees": {
                         breakfast.add(new Chees("Chees"));
                         break;
                     }
-                    case "Apple" : {
+                    case "Apple": {
                         breakfast.add(new Apple("Apple", args[++i]));
                         break;
                     }
                     default: {
-                        if(args[i].charAt(0) == '-'){
+                        if (args[i].charAt(0) == '-') {
                             break;
                         }
                         throw new RuntimeException("Class " + args[i] + " not Found");
@@ -44,10 +59,17 @@ public class Main {
 
         String drink = console.nextLine();
         String fruit = console.nextLine();
+        try {
+            Cocktail ToCompear = null;
+            Class clazz = Class.forName(Cocktail.class.getName());
+            Class[] params = {String.class, String.class, String.class};
+            ToCompear = (Cocktail) clazz.getConstructor(params).newInstance("Coctail", drink, fruit);
+            Count(breakfast, ToCompear);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
+                 NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
 
-        Cocktail ToCompear = new Cocktail("Coctail", drink, fruit);
-
-        Count(breakfast, ToCompear);
 
         if(IfCalories(args)) {
             System.out.println("Tatal caloris is: " + Calculate(breakfast));
@@ -64,11 +86,10 @@ public class Main {
                         return 0;
                     }
                 }
-
             });
 
             sortBreakfast.addAll(breakfast);
-            
+
 
             for(Food f : sortBreakfast){
                 System.out.println(f);
@@ -92,7 +113,7 @@ public class Main {
                 counter++;
             }
         }
-        System.out.println("Nym of same elements is/are: " + counter);
+        System.out.println("Num of same elements is/are: " + counter);
     }
 
     static boolean IfCalories(String[] arguments){
