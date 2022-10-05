@@ -16,6 +16,7 @@ public class Main {
             for (int i = 0; i < size; ++i) {
                 switch (args[i]) {
                     case "Coctail": {
+                        // Ad hoc thing
                         try {
                             Cocktail coctail = null;
                             Class clazz = Class.forName(Cocktail.class.getName());
@@ -60,6 +61,7 @@ public class Main {
 
         String drink = console.nextLine();
         String fruit = console.nextLine();
+        // Ad hoc thing
         try {
             Cocktail ToCompear = null;
             Class clazz = Class.forName(Cocktail.class.getName());
@@ -70,7 +72,6 @@ public class Main {
                  NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
-
 
         if(IfCalories(args)) {
             System.out.println("Tatal caloris is: " + Calculate(breakfast));
@@ -91,17 +92,17 @@ public class Main {
 
             sortBreakfast.addAll(breakfast);
 
-
             for(Food f : sortBreakfast){
                 System.out.println(f);
             }
-        }
 
+        }
     }
 
     static int Calculate(Vector<Food> breakfast){
         int caloris = 0;
         for(int i = 0; i < breakfast.size(); i++){
+            // Ad hoc thing
             try {
                 Method method = breakfast.elementAt(i).getClass().getDeclaredMethod("calculateCalories");
                 method.setAccessible(true);
