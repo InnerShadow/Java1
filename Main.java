@@ -2,6 +2,7 @@ package rfe.bsu.SikolenkoMa.laba1;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 public class Main {
@@ -101,7 +102,14 @@ public class Main {
     static int Calculate(Vector<Food> breakfast){
         int caloris = 0;
         for(int i = 0; i < breakfast.size(); i++){
-            caloris += breakfast.elementAt(i).calculateCalories();
+            try {
+                Method method = breakfast.elementAt(i).getClass().getDeclaredMethod("calculateCalories");
+                method.setAccessible(true);
+                Object value = method.invoke(breakfast.elementAt(i));
+                caloris += (int) value;
+            } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return caloris;
     }

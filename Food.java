@@ -8,6 +8,11 @@ public abstract class Food implements Consumable {
     protected String name = null;
     protected double colories = 0.f;
 
+    @Override
+    public int calculateCalories() {
+        return 0;
+    }
+
     public Food(String name, double colories) {
         this.name = name;
         this.colories = colories;
